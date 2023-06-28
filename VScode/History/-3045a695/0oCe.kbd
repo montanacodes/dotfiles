@@ -1,0 +1,48 @@
+(defcfg
+  ;; ** For Linux **
+  ;;input  (device-file "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd")
+  ;; input  (device-file "/dev/input/by-id/usb-Matias_Ergo_Pro_Keyboard-event-kbd")
+  ;;output (uinput-sink "KMonad output")
+
+  ;; ** For Windows **
+   input  (low-level-hook)
+   output (send-event-sink)
+
+  ;; ** For MacOS **
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  fallthrough true
+)
+
+(defsrc
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  scrick
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  tab     q    w    e    r    t          y    u    i    o    p    bksl
+  caps    a    s    d    f    g          h    j    k    l    ;    scin
+  lsft    z    x    c    v    b          n    m    ,    .    /    rsft
+        grv  bksl  lft  rght            scrup  scrdn  lbrc  rbrc
+
+                      lctrl  lalt         met    rctl    
+                 bks   del   home         pgup   return   spc
+                             end 			    pgdn															
+)
+
+(defalias 
+
+  l_dh (layer-switch colemak-dhm)
+)
+
+(deflayer colemak-dhm
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  scrick
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  lctrl     q    w    j    r    t          y    u    i    o    p    bksl
+  caps    a    s    d    f    g          m    n    e    l    ;    scin
+  lsft    z    x    c    v    b          n    h    ,    .    /    rsft
+        grv  bksl  lft  rght            scrup  scrdn  lbrc  rbrc
+
+                      @ext  lalt         met    @sym1    
+                 bks   del   home         pgup   return   spc
+                             end 			    pgdn	
+)
+

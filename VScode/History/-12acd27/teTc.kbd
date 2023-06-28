@@ -1,0 +1,124 @@
+(defcfg
+  ;; ** For Linux **
+  ;;input  (device-file "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd")
+  ;; input  (device-file "/dev/input/by-id/usb-Matias_Ergo_Pro_Keyboard-event-kbd")
+  ;;output (uinput-sink "KMonad output")
+
+  ;; ** For Windows **
+   input  (low-level-hook)
+   output (send-event-sink)
+
+  ;; ** For MacOS **
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  fallthrough true
+)
+
+(defsrc
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  tab     q    w    e    r    t          y    u    i    o    p    bksl
+  caps    a    s    d    f    g          h    j    k    l    ;    scln
+  lsft    z    x    c    v    b          n    m    ,    .    /    rsft
+        grv  bksl  lft  rght            scrup  scrdn  lbrc  rbrc
+
+                      lctrl  lalt         met    rctl    
+                 bks   del   home         pgup   return   spc
+                             end 			    pgdn															
+)
+
+(defalias 
+  l_dh (layer-switch colemak-dhm)
+)
+
+(defalias
+  ext  (layer-toggle extend) ;; Bind 'ext' to the Extend Layer
+;;  fun  (layer-toggle function) ;; Bind 'fun' to the Function Layer
+  sym1 (layer-toggle symbols1) ;; Bind 'sym1' to Symbols Layer 1
+;;  sym2 (layer-toggle symbols2) ;; Bind 'sym2' to Symbols Layer 2
+)
+
+(defalias 
+  ls_s (sticky-key 1500 lsft)
+  lc_s (sticky-key 1500 lctl)
+  la_s (sticky-key 1500 lalt)
+  ra_s (sticky-key 1500 ralt)
+  lm_s (sticky-key 1500 lmet)
+  lsc_s (around @lc_s @ls_s)
+  lac_s (around @lc_s @la_s)
+)
+
+(defalias
+  cpy C-c
+  pst C-v
+  cut C-x
+  scpy C-S-c
+  spst C-S-v
+  scut C-S-x
+  udo C-z
+  all C-a
+  fnd C-f
+  bk A-left
+  fw A-right
+  v+ VolumeUp
+  v- VolumeDown 
+  v0 Mute
+  mpl play
+  mps previoussong
+  mns nextsong
+  mrw rewind
+  mpp pause
+  mst stop
+  b+ BrightnessUp
+  b- BrightnessDown
+  ra1 (around ralt 1)
+  ra2 (around ralt 2)
+  ra3 (around ralt 3)
+  ra4 (around ralt 4)
+  ra5 (around ralt 5)
+  ra6 (around ralt 6)
+  ra7 (around ralt 7)
+  ra8 (around ralt 8)
+  ra9 (around ralt 9)
+  ra0 (around ralt 0)
+)
+(deflayer colemak-dhm
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  tab     q    w    j    r    t          y    u    i    o    p    bksl
+  caps    a    s    d    f    g          m    n    e    l    ;    scln
+  lsft    z    x    c    v    b          n    h    ,    .    /    rsft
+        grv  bksl  lft  rght            scrup  scrdn  lbrc  rbrc
+
+                      lctrl  lalt         met    rctrl  
+                 bks   del   home         rsft   return   spc
+                             @ext 			    @sym1	
+)
+
+
+(deflayer extend
+  _   @mpl @mrw @mps @mns ejectcd refresh brdn brup         www   mail  prog1  prog2  _  
+  _     f1    f2    f3    f4    f5          f6    f7    f8    f9    f10    f11
+  esc     @bk    @fnd    @fw    ins    ssrq          pgup    home    up    end    caps    f12
+  @la_s    @lm_s    @ls_s    @lc_s    @ra_s    slck          pgdn    lft    down    right    del    menu
+  @udo    @cut    @cpy    lmet    @pst    @udo          cmp    ssrq    bks    tab    cmp    ret
+        _  _  _  _            _  _  _  _
+
+                      _  _         _    _    
+                 _   _   _         _   _   _
+                             _ 			    _	
+)
+
+(deflayer symbols1
+  _   _ _ _ _ _ _ _ _         _   _  _  _  _  _
+  _     _    _    _    _          _    _    _    _    _    _
+  _     S-1    S-2    S-3    S-4    S-5          =    7    8    9    +    _
+  _    ;    :    {    \(    [          *    4    5    6    -    _
+  _    S-6    S-7    }    \)    ]          0    1    2    3    /    _
+        _  _  _  _            _  _  _  _
+
+                      _  _         _    _    
+                 _   _   _         _   _   _
+                             _ 			    _	
+)

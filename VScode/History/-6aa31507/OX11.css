@@ -1,0 +1,42 @@
+
+
+* {
+    padding: 0%;
+    margin: 0;
+}
+
+
+/* the navbar styled is the ul not the nav */
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-right: 40px;
+    background-color: black;
+    font-family: 'Space Mono', monospace;
+    color: aliceblue;
+}
+a {
+    color: aliceblue;
+    text-decoration: none;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: blueviolet;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: none;
+}
+.logo {
+    font-size: 22px;
+    padding-right: 30vw;
+}

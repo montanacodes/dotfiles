@@ -1,0 +1,15 @@
+
+
+* {
+    padding: 0%;
+    margin: 0;
+}
+
+nav {
+    list-style: none;
+    display: inline flex;
+}
+.logo {
+    font-family: 'Space Mono';
+    font-size: 22px;
+}

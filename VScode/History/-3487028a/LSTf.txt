@@ -1,0 +1,97 @@
+Using Cram.com with - for flip card and | for next card
+
+JavaScript variables are-containers for data values|
+
+Declaring a variable-const x = 5 (constant)
+let y = 6 (changable)
+var z = 7 (defunct)|
+
+for loop-
+for (expression 1; expression 2; expression 3) {
+  // code block to be executed
+}
+
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}|
+
+WHILE LOOP-while (condition) {
+  // code block to be executed
+}
+var i = 1;
+while (i < 6) {
+    console.log(i);
+    i++;
+};
+console.log('Countdown finished!')|
+
+ARRAY LITERAL SYNTAX-var train1 = ["wheat", "barley", "potato", "rocks"]|
+
+Function SYNTAX-function name(parameter1, parameter2, parameter3) {
+  // code to be executed
+}
+|
+Function parameters are listed- inside the parentheses () in the function definition.|
+
+Function arguments are- the values received by the function when it is invoked.|
+
+Calling a function-let x = myFunction(4, 3);   
+// Function is called, return value will end up in x
+
+function myFunction(a, b) {
+  return a * b;             
+}
+// Function returns the product of a and b|
+
+an object consists of key-value pairs, known as -properties.​|
+We can add new key-value pairs to existing objects using the-dot notation. |
+
+If the function is a property of an object-it is then referred to as a method.|
+
+A function of a declared variable looks like-
+var car = {};
+
+car.color = "red";
+
+car.turnKey = function() { 
+  console.log('engine running'); 
+}|
+
+Arrays in Javascript are actually-just Objects
+var test = typeof([1,2,3])|
+
+Built in string method
+search():- It is used to search a string for a specific value or an expression. It returns the position of the match.|
+Built in string method
+split():- It is used to split a string into an array of substrings.|
+Built in string method
+startsWith():- It is used to check whether a string begins with the specified characters.|
+Built in string method
+slice():- It is used to e2xtract a part of a string and return a new string.|
+Built in string method
+concat():- It is used to combine texts of two strings and return a new string.|
+Built in string method
+charAt():- It is used to return the character at the specified index.|
+Built in string method
+indexOf():- It is used to return the index, within the string object, which occurs first, of the specified value. It returns -1 if the object is not found.|
+Built in string method
+lastIndexOf():- It is used to return the index, within the string object, which occurs last, of the specified value. It returns -1 if the object is not found.|
+Built in string method
+match():- It is used to match a regular expression against a string.|
+Built in string method
+replace():- It is used to find a match between a regular expression and a string. The matched substring is replaced with a new substring.|
+Built in string method
+substr():- It is used to return the characters in a string, beginning at the specified location, through the specified number of characters.|
+Built in string method
+substring():- It is used to return the characters in a string between the two specified indexes.|
+Built in string method
+toLowerCase():- It is used to convert the string value which is called, to lower case.|
+Built in string method
+toUpperCase():- It is used to convert the string value which is called, to upper case.|
+Built in string method
+valueOf():- It is used to return the primitive value of the specified object|
+
+User defined string method
+logIt():- It is used to log a parameter back to the console, when the code is executed.|
+User defined string method
+return():- It is used to return a specific value, explicitly.|

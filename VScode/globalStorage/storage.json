@@ -1,0 +1,99 @@
+{
+    "telemetry.machineId": "3ee074f26dc5a6fcc6b1bacc3c10de41768823edcd4a470d0cc9d74500fb0b40",
+    "theme": "vs-dark",
+    "themeBackground": "#282a36",
+    "windowSplash": {
+        "zoomLevel": -1,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "#f8f8f2",
+            "background": "#282a36",
+            "editorBackground": "#282a36",
+            "titleBarBackground": "#21222c",
+            "activityBarBackground": "#343746",
+            "sideBarBackground": "#21222c",
+            "statusBarBackground": "#191a21",
+            "statusBarNoFolderBackground": "#191a21"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 36,
+            "activityBarWidth": 48,
+            "sideBarWidth": 306,
+            "statusBarHeight": 22,
+            "windowBorder": false
+        }
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "backupPath": "C:\\Users\\magic\\AppData\\Roaming\\Code\\Backups\\1687927877265",
+            "uiState": {
+                "mode": 1,
+                "x": 128,
+                "y": 0,
+                "width": 1024,
+                "height": 688
+            }
+        },
+        "openedWindows": [
+            {
+                "backupPath": "C:\\Users\\magic\\AppData\\Roaming\\Code\\Backups\\1687923946373",
+                "uiState": {
+                    "mode": 1,
+                    "x": 0,
+                    "y": 0,
+                    "width": 1028,
+                    "height": 688
+                }
+            },
+            {
+                "backupPath": "C:\\Users\\magic\\AppData\\Roaming\\Code\\Backups\\1687927877265",
+                "uiState": {
+                    "mode": 1,
+                    "x": 128,
+                    "y": 0,
+                    "width": 1024,
+                    "height": 688
+                }
+            }
+        ]
+    },
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [],
+        "emptyWindows": [
+            {
+                "backupFolder": "1687923946373"
+            },
+            {
+                "backupFolder": "1687927877265"
+            }
+        ]
+    },
+    "windowControlHeight": 30,
+    "userDataProfilesMigration": true,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///d%3A/code/Coursera/Portfolio%20Restaurant%20for%20HTML%20CSS%20Course": "__default__profile__",
+            "file:///d%3A/code/GitHub": "__default__profile__",
+            "file:///d%3A/code/MontanaCodes": "__default__profile__",
+            "file:///d%3A/code/GitHub/montanacodes.github.io": "__default__profile__",
+            "file:///d%3A/code/freeCodeCamp/javascript-basic-projects/01-color-flipper/setup": "__default__profile__",
+            "file:///d%3A/code/freeCodeCamp/javascript-basic-projects/01-color-flipper": "__default__profile__",
+            "file:///z%3A/masonrystagger-option-vanilla-js/dist": "__default__profile__",
+            "file:///z%3A/masonryfluid-columnwidth": "__default__profile__",
+            "file:///d%3A/code/freeCodeCamp/javascript-basic-projects/03-reviews": "__default__profile__",
+            "file:///d%3A/code/vite-project": "__default__profile__",
+            "file:///d%3A/code/12hrCodingBootCamp": "__default__profile__",
+            "vscode-remote://wsl%2Bubuntu-22.04/home/magic/.bash_it/plugins": "__default__profile__",
+            "vscode-remote://wsl%2Bubuntu/home/m/.config/cava": "__default__profile__"
+        },
+        "emptyWindows": {
+            "1687923946373": "__default__profile__",
+            "1687927877265": "__default__profile__"
+        }
+    },
+    "profileAssociationsMigration": true,
+    "window.experimental.useSandbox": true
+}

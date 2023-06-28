@@ -1,0 +1,425 @@
+#|
+This is a sample configuration file that showcases every feature in kanata.
+If anything is confusing or hard to discover, please file an issue or
+contribute a pull request to help improve the document.
+|#
+
+;; Single-line comments are prefixed by double-semicolon. A single semicolon
+;; is parsed as the keyboard key. Comments are ignored for the configuration
+;; file.
+
+#|
+A multi-line comment block begin with an octothorphe followed by a pipe: `#|`.
+To end the multi-line comment block, have a pipe followed by an octothorpe,
+like the following sequence with the colon removed: `|:#`. The actual two
+character sequence is not used because it would end this multi-line comment
+block and cause a parsing error.
+
+This configuration language is Lisp-like and uses S-Expression syntax.
+If you're unfamiliar with Lisp, don't be alarmed. The maintainer jtroo is
+also unfamiliar with Lisp. You don't need to know Lisp in-depth to
+be able to configure kanata.
+
+If you follow along with the examples, you should be fine. Kanata should
+also hopefully have helpful error messages in case something goes wrong.
+If you need help, you are welcome to ask.
+|#
+
+;; Exactly one defcfg entry is required. This is used for configuration key-pairs.
+(defcfg
+  ;; Your keyboard device will likely differ from this. I believe /dev/input/by-id/
+  ;; is preferable; I recall reading that it's less likely to change names on you,
+  ;; but I didn't find any keyboard device in there in my VM.
+
+  ;; If you want to read from multiple devices, separate them by `:`.
+  ;; linux-dev /dev/input/<dev1>:/dev/input/<dev2>
+  ;;
+  ;; If you have a colon in your device path, add a backslash before it so that
+  ;; kanata does not parse it as multiple devices.
+  ;; linux-dev /dev/input/path-to\:device
+
+  ;; By default, kanata will crash if no input devices are found. You can change
+  ;; this behaviour by setting `linux-continue-if-no-devs-found`.
+  ;; 
+  ;; linux-continue-if-no-devs-found yes
+
+  ;; Windows doesn't need any input/output configuration entries; however, there
+  ;; must still be a defcfg entry.
+  ;;
+  ;; There is an optional configuration entry for Windows to help mitigate strange
+  ;; behaviour of AltGr if your layout uses that. Uncomment one of the items below
+  ;; to change what kanata does with the key.
+  ;;
+  ;; For more context, see: https://github.com/jtroo/kanata/issues/55.
+  ;;
+  ;; windows-altgr cancel-lctl-press ;; remove the lctl press that comes as a combo with ralt
+  ;; windows-altgr add-lctl-release  ;; add an lctl release when ralt is released
+  ;;
+  ;; NOTE: even with these workarounds, putting lctl+ralt in your defsrc may
+  ;; not work too well with other applications that use WH_KEYBOARD_LL.
+  ;; Known applications with issues: GWSL/VcXsrv
+
+  ;; Optional configuration: enable kanata to execute commands.
+  ;;
+  ;; I consider this feature a hazard so it is conditionally compiled out of
+  ;; the default binary.
+  ;;
+  ;; This is dangerous because it allows kanata to execute arbitrary commands.
+  ;; Using a binary compiled with the cmd feature enabled, uncomment below to
+  ;; enable command execution:
+  ;;
+  ;; danger-enable-cmd yes
+
+  ;; Optional configuration: enable processing of keys that are not in defsrc.
+  ;; This is useful if you are only mapping a few keys in defsrc instead of
+  ;; most of the keys on your keyboard. Without this, the tap-hold-release and
+  ;; tap-hold-press actions will not activate for keys that are not in defsrc.
+  ;;
+  ;; The reason this is not enabled by default is because some keys may not
+  ;; work correctly if they are intercepted. E.g. rctl/altgr on Windows; see the
+  ;; windows-altgr configuration item above for context.
+  ;;
+  ;; process-unmapped-keys yes
+
+  ;; Optional configuration: intercept mouse buttons for a specific mouse device.
+  ;; The intended use case for this is for laptops such as a Thinkpad, which have
+  ;; mouse buttons that may be useful to activate kanata actions with. This only
+  ;; works with the Interception driver.
+  ;;
+  ;; To know what numbers to put into the string, you can run the
+  ;; kanata-wintercept variant with this defcfg item defined with random numbers.
+  ;; Then when a button is first pressed on the mouse device, kanata will print
+  ;; its hwid in the log; you can then copy-paste that into this configuration
+  ;; entry. If this defcfg item is not defined, the log will not print.
+  ;;
+  ;; windows-interception-mouse-hwid "70, 0, 90, 0, 20"
+)
+
+;; deflocalkeys-* enables you to define and use key names that match your locale
+;; by defining OS code number mappings for that character.
+;;
+;; There are three variants of deflocalkeys-*:
+;; - deflocalkeys-win
+;; - deflocalkeys-wintercept
+;; - deflocalkeys-linux
+;;
+;; Only one of each deflocalkeys-* variant is allowed. The variants that are
+;; not applicable will be ignored, e.g. deflocalkeys-linux and deflocalkeys-wintercept
+;; are both ignored when using the default Windows kanata binary.
+;;
+;; The configuration item is parsed similarly to defcfg; it is composed of
+;; pairs of keys and values.
+;;
+;; You can check docs/locales.adoc for the mapping for your locale. If your
+;; locale is not there, please ask for help if needed, and add the mapping for
+;; your locale to the document.
+;;
+;; Web link for locales: https://github.com/jtroo/kanata/blob/main/docs/locales.adoc
+;;
+;; This example is for an Italian keyboard remapping in Linux. The numbers will
+;; unfortunately differ between Linux, Windows-hooks, and Windows-interception.
+;;
+;; To see how you can discover key mappings for yourself, see the "Non-US keyboards"
+;; section of docs/config.adoc.
+;;
+;; Web link or config: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
+
+
+;; Only one defsrc is allowed.
+;;
+;; defsrc defines the keys that will be intercepted by kanata. The order of the
+;; keys matches the deflayer declarations and all deflayer declarations must
+;; have the same number of keys as defsrc.
+;;
+;; The visual/spatial positioning is *not* mandatory; it is done by convention
+;; for visual ease. These items are parsed as a long list with newlines being
+;; ignored.
+;;
+;; If you are looking for other keys, the file src/keys/mod.rs should hopefully
+;; provide some insight.
+
+(defsrc
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  esc     q    w    f    p    b          j    l    u    y    ;    bksl
+  del    a    r    s    t    g          m    n    e    i    o    scln
+  lsft    z    x    c    d    v          k    h    ,    .    .    caps
+        grv  bksl  lft  rght            up  down  lbrc  rbrc
+
+                      lctrl  lalt         met    rctl    
+                 bks   del   home         pgup   return   spc
+                             end 			    pgdn															
+)
+;; The first layer defined is the layer that will be active by default when
+;; kanata starts up. This layer is the standard QWERTY layout except for the
+;; backtick/grave key (@grl) which is an alias for a tap-hold key.
+;;
+;; There are currently a maximum of 25 layers allowed.
+
+(deflayer colemak-dhm
+  esc   f1 f2 f3 f4 f5 f6 f7 f8         f9   f10  f11  f12  prnt  
+  eql     1    2    3    4    5          6    7    8    9    0    min
+  esc     q    w    f    p    b          j    l    u    y    ;    bksl
+  del    a    r    s    t    g          m    n    e    i    o    scln
+  lsft    z    x    c    d    v          k    h    ,    .    .    caps
+        grv  bksl  left  rght            up  down  lbrc  rbrc
+
+                      @dctl  lalt         met    rctl  
+                 bks   lsft   @hext         @psym   @esym   spc
+                             tab 			    pgdn	
+)
+
+;; defalias is used to declare a shortcut for a more complicated action to keep
+;; the deflayer declarations clean and aligned. The alignment in deflayers is not
+;; necessary, but is strongly recommended for ease of understanding visually.
+;;
+;; Aliases are referred to by `@<alias_name>`. Aliases can refer to each other,
+;; e.g. in the `anm` alias. However, an alias can only refer to another alias
+;; that has been defined before it in the file.
+(defalias 
+  l_dh (layer-switch colemak-dhm)
+)
+  ;; aliases to change the base layer to qwerty or dvorak
+  
+
+  ;; Aliases for layer "toggling". It's not quite toggling because the layer
+  ;; will be active while the key is held and deactivated when the key is
+  ;; released. An alternate action name you can use is layer-while-held.
+  ;; However, the rest of this document will use The term "toggle" for brevity.
+  (defalias
+  ext  (layer-toggle extend) ;; Bind 'ext' to the Extend Layer
+;;  fun  (layer-toggle function) ;; Bind 'fun' to the Function Layer
+  sym1 (layer-toggle symbols1) ;; Bind 'sym1' to Symbols Layer 1
+;;  sym2 (layer-toggle symbols2) ;; Bind 'sym2' to Symbols Layer 2
+  sym2 (layer-toggle symbols2) ;; Bind 'sym2' to Symbols Layer 2
+  fun  (layer-toggle function) ;; Bind 'fun' to the Function Layer
+
+
+  hext (tap-hold 200 200 home @ext)
+  ;; pext (tap-hold 200 pgdn @ext)
+
+  ;;lsym2 (tap-hold 200 left @sym2)
+  ;;dsym2 (tap-hold 200 down @sym2)
+
+  esym (tap-hold 200 200 return @sym1)
+         
+  psym (tap-hold 200 200 pgup @sym2)
+  ;;rsym (tap-hold 200 rght @sym1)
+  ;;usym (tap-hold 200 up @sym1)
+
+
+
+  dctl (tap-hold 200 200 del lctrl)
+)
+  ;; tap-hold aliases with tap for dvorak key, and hold for toggle layers
+  ;;
+  ;; tap-hold parameter order:
+  ;; 1. tap timeout
+  ;; 2. hold timeout
+  ;; 3. tap action
+  ;; 4. hold action
+  ;;
+  ;; The hold timeout is the number of milliseconds after which the hold action
+  ;; will activate.
+  ;;
+  ;; The tap timeout is best explained in a roundabout way. When you press and
+  ;; hold a standard key on your keyboard (e.g. 'a'), your operating system will
+  ;; read that and keep sending 'a' to the active application. To be able to
+  ;; replicate this behaviour with a tap-hold key, you must press-release-press
+  ;; the key within the tap timeout window (number is milliseconds). Simply
+  ;; holding the key results in the hold action activating, which is why you
+  ;; need to double-press for the tap action to stay pressed.
+  ;;
+  ;; There are two additional versions of tap-hold available:
+  ;; 1. tap-hold-press: if there is a key press, the hold action is activated
+  ;; 2. tap-hold-release: if there is a press and release of another key, the
+  ;; hold action is activated
+  ;;
+  ;; These versions are useful if you don't want to wait for the whole hold
+  ;; timeout to activate, but want to activate the hold action immediately
+  ;; based on the next key press or press and release of another key. These
+  ;; versions might be great to implement home row mods.
+  ;;
+  ;; If you come from kmonad, tap-hold-press and tap-hold-release are similar
+  ;; to tap-hold-next and tap-hold-next-release, respectively. If you know
+  ;; the underlying keyberon crate, tap-hold-press is the HoldOnOtherKeyPress
+  ;; and tap-hold-release is the PermissiveHold configuration.
+ 
+
+  ;; Below is an alias for the `multi` action which executes multiple actions
+  ;; in order but at the same time.
+  ;;
+  ;; It may result in some incorrect/unexpected behaviour if combining complex
+  ;; actions, so be reasonable with it. One reasonable use case is this alias:
+  ;; press right-alt while also toggling to the `ralted` layer. The utility of
+  ;; this is better revealed if you go see `ralted` and its aliases.
+
+;;(defalias
+  ;; shifted keys
+  ;;{ S-[
+  ;;} S-]
+  ;;: S-;
+
+  ;; alias numbers as themselves for use in macro
+  ;;8 8
+  ;;0 0
+;;)
+
+(defalias 
+  ls_s (sticky-key 1500 lsft)
+  lc_s (sticky-key 1500 lctl)
+  la_s (sticky-key 1500 lalt)
+  ra_s (sticky-key 1500 ralt)
+  lm_s (sticky-key 1500 lmet)
+  lsc_s (around @lc_s @ls_s)
+  lac_s (around @lc_s @la_s)
+
+)
+
+(defalias
+
+  renm A-f2
+
+  clse A-f4
+  cpy C-c
+  pst C-v
+  cut C-x
+  scpy C-S-c
+  spst C-S-v
+  scut C-S-x
+  udo C-z
+  all C-a
+  fnd C-f
+  bk A-left
+  fw A-right
+  v+ VolumeUp
+  v- VolumeDown 
+  v0 Mute
+  mpl play
+  mps previoussong
+  mns nextsong
+  mrw rewind
+  mpp pause
+  mst stop
+  b+ BrightnessUp
+  b- BrightnessDown
+  ra1 (around ralt 1)
+  ra2 (around ralt 2)
+  ra3 (around ralt 3)
+  ra4 (around ralt 4)
+  ra5 (around ralt 5)
+  ra6 (around ralt 6)
+  ra7 (around ralt 7)
+  ra8 (around ralt 8)
+  ra9 (around ralt 9)
+  ra0 (around ralt 0)
+)
+
+  ;; Having a cmd action in your configuration without explicitly enabling
+  ;; `danger-enable-cmd` **and** using the cmd-enabled executable will make
+  ;; kanata refuse to load your configuration. The aliases below are commented
+  ;; out since commands aren't allowed by this configuration file.
+  ;;
+  ;; Note that the parameters to `cmd` are executed directly as opposed to
+  ;; passed to a shell. So for example, `~` and `$HOME` would not refer
+  ;; to your home directory on Linux.
+  ;;
+  ;; You can use:
+  ;; `cmd bash -c "your_stuff_here"` to run your command inside of bash.
+  ;;
+  ;; cm1 (cmd bash -c "echo hello world")
+  ;; cm2 (cmd rm -fr /tmp/testing)
+)
+
+;; The underscore _ means transparent. The key on the base layer will be used
+;; instead. XX means no-op. The key will do nothing.
+(deflayer numbers
+
+
+;; The `lrld` action stands for "live reload". This will re-parse everything
+;; except for linux-dev. So in Linux, you cannot live reload and switch keyboard
+;; devices at the time of writing.
+;;
+;; Upon a successful reload, the kanata state will begin on the default base layer
+;; in the configuration. E.g. in this example configuration, you would start on
+;; the qwerty layer.
+;;
+;; WARNING: live reload leaks memory. This should not be a major problem though.
+;; Here are the measurements of memory consumption on Windows for version 1.0.0:
+;; - 20 reloads: 15.4 MB memory consumed
+;; - 50 reloads: 20.4 MB memory consumed
+;; So about 170 KB used per live reload. You'll probably be fine.
+;;
+;; Note: version 1.0.3 has probably doubled the amount of memory leaked per
+;; reload, though it has not been measured. In practice it's still negligible
+;; compared to a browser for example.
+(deflayer extend
+  lctrl   @mpl @mrw @mps @mns ejectcd refresh brdn brup         www   mail  prog1  prog2  lctrl  
+  lctrl     f1    f2    f3    @clse    f5          f6    f7    f8    f9    f10    f11
+  esc     lctrl    @bk    @fw    scrup    ssrq          pgup    home    up    end    caps    f12
+  @la_s    @udo    @cut    @cpy    @pst      slck          pgdn    lft    down    right    del    menu
+  lmet    @lm_s    @ls_s    @lc_s    scrdn    lctrl          cmp    ssrq    bks    tab    cmp    ret
+        lctrl  lctrl  lctrl  lctrl            lctrl  lctrl  lctrl  lctrl
+
+                      lctrl  lctrl         lctrl    rctrl    
+                 lctrl   lctrl   lctrl         @fun   lctrl   lctrl
+                             lctrl 			    lctrl	
+)
+(deflayer symbols1
+  lctrl   lctrl lctrl lctrl lctrl lctrl lctrl lctrl lctrl         lctrl   lctrl  lctrl  lctrl  lctrl  lctrl
+  lctrl     lctrl    lctrl    lctrl    lctrl          lctrl    lctrl    lctrl    lctrl    lctrl    lctrl
+  lctrl     S-1    S-2    S-3    S-4    S-5         S-6    S-7    S-8    lctrl    lctrl    lctrl
+  lctrl      |     -      {       \(    [            =    <    ;    S-;    S-/    lctrl    
+  lctrl     ~      +    '       S-'    ,              .   /   \_   f12    lctrl    lctrl
+        lctrl  lctrl  lctrl  lctrl            lctrl  lctrl  lctrl  lctrl
+
+                      lctrl  lctrl         lctrl    lctrl    
+                 lctrl   lctrl   @fun         lctrl   lctrl   lctrl
+                             lctrl 			    lctrl
+)
+(deflayer symbols2
+  lctrl   lctrl lctrl lctrl lctrl lctrl lctrl lctrl lctrl         lctrl   lctrl  lctrl  lctrl  lctrl  lctrl
+  lctrl     lctrl    lctrl    lctrl    lctrl          lctrl    lctrl    lctrl    lctrl    lctrl    lctrl
+  lctrl     S-1    S-2    S-3    S-4    S-5       S-6    S-7    S-8    lctrl    lctrl  lctrl
+  lctrl    |     -      }    \)       ]  =    >   S-;   @renm    S-/    lctrl
+  `    ~     +      '    S-'      ,  .    \\   \_    f12    lctrl    lctrl
+        lctrl  lctrl  lctrl  lctrl            lctrl  lctrl  lctrl  lctrl
+
+                      lctrl  lctrl         lctrl    lctrl    
+                 lctrl   lctrl   lctrl         lctrl   lctrl   lctrl
+                             lctrl 			    lctrl	
+)
+
+(deflayer function
+  lctrl   lctrl lctrl lctrl lctrl lctrl lctrl lctrl lctrl         lctrl   lctrl  lctrl  lctrl  lctrl  lctrl
+  lctrl     lctrl    lctrl    lctrl    lctrl          lctrl    lctrl    lctrl    lctrl    lctrl    lctrl
+  lctrl     @mst  @mps  @mpp  @mns  @b-        f12   f7    f8    f9    C-+   lctrl 
+  lctrl     @la_s @lm_s @ls_s @lc_s @b+        f11   f4    f5    f6    C--    lctrl
+  lctrl     @v0   @v-   @scpy @v+   @spst      f10   f1    f2    f3    C-0    lctrl
+        lctrl  lctrl  lctrl  lctrl            lctrl  lctrl  lctrl  lctrl
+
+                      lctrl  lctrl         lctrl    lctrl    
+                 lctrl   lctrl   lctrl         lctrl   lctrl   lctrl
+                             lctrl 			    lctrl	
+                             
+)
+
+(defalias
+  ;; Mouse wheel actions. The first number is the interval in milliseconds
+  ;; between scroll actions. The second number is the distance in some arbitrary
+  ;; unit. Play with the parameters to see what feels correct. Both numbers
+  ;; must be in the range 1-65535
+  ;;
+  ;; In both Windows and Linux, 120 distance units is equivalent to a single
+  ;; notch movement on a physical wheel. In Linux, not all desktop environments
+  ;; support the REL_WHEEL_HI_RES event so kanata just doesn't use it; instead a
+  ;; scroll happens if 120 or more distance units are accumulated. This may result
+  ;; in poor scrolling experience so in Linux it is recommended to use a distance
+  ;; value that is a multiple of 120.
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+
+  ;; Horizontal mouse wheel actions. Similar story to vertical mouse wheel.
+  mwl (mwheel-left 50 120)
+  mwr (mwheel-right 50 120)
+)

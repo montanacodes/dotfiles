@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "D:/code/freeCodeCamp/javascript-basic-projects/01-color-flipper"
+		},
+		{
+			"path": "D:/code/freeCodeCamp/javascript-basic-projects/02-counter"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "02-counter"
+	}
+}

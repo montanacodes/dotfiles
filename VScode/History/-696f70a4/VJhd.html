@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue 3 Basics</title>
+    </head>
+    <body>
+        <div id="app">
+            {{ greeting }}
+            <input v-model="greeting" />
+        </div>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script>
+            let app = Vue.createApp({
+                data: function() {
+                    return {
+                        greeting: 'Hello Vue 3!'
+                    }
+                }
+            })
+            app.mount('#app')
+        </script>
+    </body>
+</html>

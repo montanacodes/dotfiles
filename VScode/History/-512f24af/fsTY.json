@@ -1,0 +1,14 @@
+{
+    "workbench.colorTheme": "GreyJungle",
+    "editor.fontSize": 18,
+    "window.zoomLevel": -1,
+    "workbench.colorCustomizations": {
+        "editor.background": "#fcf6c1"
+    },
+    "autoDayNightThemeSwitcher.dayTheme": "Silver Gray",
+    "autoDayNightThemeSwitcher.nightTheme": "Silver Dark",
+    "autoDayNightThemeSwitcher.autoToggleTimeNightBegin": "20:00",
+    "autoDayNightThemeSwitcher.dayThemeCustomizations": {
+    
+    }
+}

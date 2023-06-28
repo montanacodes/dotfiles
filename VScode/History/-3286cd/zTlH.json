@@ -1,0 +1,22 @@
+{
+    "workbench.colorTheme": "Dracula",
+    "editor.fontSize": 18,
+    "workbench.colorCustomizations": {
+
+    },
+    "autoDayNightThemeSwitcher.dayTheme": "Silver Gray",
+    "autoDayNightThemeSwitcher.nightTheme": "Silver Dark",
+    "autoDayNightThemeSwitcher.autoToggleTimeNightBegin": "20:00",
+    "autoDayNightThemeSwitcher.dayThemeCustomizations": {
+    
+    },
+    "python.defaultInterpreterPath": "C:\\Users\\magic\\AppData\\Local\\Microsoft\\WindowsApps\\python3.10.exe",
+    "markdown-preview-github-styles.colorTheme": "light",
+    "markdown-preview-enhanced.enableTypographer": true,
+    "markdown-preview-enhanced.revealjsTheme": "blood.css",
+    "markdown-preview-enhanced.mermaidTheme": "forest",
+    "markdown-preview-enhanced.AccessKey": "theme",
+    "markdown.extension.print.theme": "dark",
+    "markdown-preview-enhanced.previewTheme": "solarized-light.css",
+    "window.zoomLevel": 1
+}

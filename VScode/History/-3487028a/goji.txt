@@ -1,0 +1,11 @@
+Using Cram.com with - for flip card and | for next card
+
+JavaScript variables are:containers for data values;
+
+Declaring a variable:const x = 5
+let y = 6 
+var z = 7 (defunct);
+
+for loop:for (expression 1; expression 2; expression 3) {
+  // code block to be executed
+};

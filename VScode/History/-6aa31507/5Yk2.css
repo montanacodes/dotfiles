@@ -1,0 +1,16 @@
+
+
+* {
+    padding: 0%;
+    margin: 0;
+}
+
+ul > .navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+.logo {
+    font-family: 'Space Mono';
+    font-size: 22px;
+}
